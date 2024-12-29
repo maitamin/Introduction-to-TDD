@@ -5,6 +5,7 @@ class BowlingGame
     @last_pins = 0
     @shot_no = 1
     @strike_bonus_count = 0
+    @double_bonus_count = 0
   end
 
   def record_shot(pins)
@@ -36,8 +37,16 @@ class BowlingGame
       @score += pins
       @strike_bonus_count -= 1
     end
+    if @double_bonus_count > 0
+      @score += pins
+      @double_bonus_count -= 1
+    end
     if pins == 10
-      @strike_bonus_count = 2
+      if @strike_bonus_count == 0
+        @strike_bonus_count = 2
+      else
+        @double_bonus_count = 2
+      end
     end
   end
 

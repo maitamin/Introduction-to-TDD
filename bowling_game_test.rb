@@ -44,6 +44,27 @@ class BowlingGameTest < Minitest::Unit::TestCase
     assert_equal 23, @game.score
   end
 
+  def test_連続ストライクすなわちダブル
+    @game.record_shot(10) # 10 + 10 + 3 = 23
+    @game.record_shot(10) # 10 + 3 + 1 = 14
+    @game.record_shot(3)
+    @game.record_shot(1)
+    record_many_shots(14, 0) # 全体では18投になる
+
+    assert_equal 41, @game.score
+  end
+
+  def test_3連続ストライクすなわちターキー
+    @game.record_shot(10) # + 10 + 3 = 30
+    @game.record_shot(10) # + 10 + 3 = 23
+    @game.record_shot(10) # + 3 + 1 = 14
+    @game.record_shot(3)
+    @game.record_shot(1)
+    record_many_shots(12, 0) # 全体では17投になる
+
+    assert_equal 71, @game.score
+  end
+
   private
 
   def record_many_shots(count, pins)
