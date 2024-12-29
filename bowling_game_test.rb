@@ -34,6 +34,15 @@ class BowlingGameTest < Minitest::Unit::TestCase
     assert_equal 13, @game.score
   end
 
+  def test_ストライクを取ると次の2投分の点数が加算される
+    @game.record_shot(10) # 10 + 3 + 3 = 16
+    @game.record_shot(3)
+    @game.record_shot(3)
+    @game.record_shot(1)
+    record_many_shots(15, 0) # 全体では19投になる
+
+    assert_equal 23, @game.score
+  end
 
   private
 
