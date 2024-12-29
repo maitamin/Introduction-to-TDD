@@ -16,6 +16,8 @@ class BowlingGameTest < Minitest::Unit::TestCase
     assert_equal 20, @game.score
   end
 
+  private
+  
   def record_many_shots(count, pins)
     count.times do
       @game.record_shot(pins)
